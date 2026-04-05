@@ -1,144 +1,87 @@
 # 🎬 Math Animation MCP
 
-> **一键生成 3Blue1Brown 风格的数学教学动画**
+> **一句话描述你想要的动画，AI 自动生成 3Blue1Brown 风格教学视频**
 >
-> 支持文字描述 / LaTeX 公式 / PDF 试卷 / 图片截图 → 自动输出教学视频。
-> 中文高考 / 中考知识点全覆盖，面向零基础用户设计。
+> 支持：文字描述 / LaTeX 公式 / PDF 试卷 / 图片截图 → 自动输出教学 MP4  
+> 覆盖：高考/中考数学、物理、计算机科学，零编程基础可用
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
-[![Manim](https://img.shields.io/badge/Manim-0.18+-green.svg)](https://www.manim.community/)
-[![MCP](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io/)
-
----
-
-## 目录
-
-- [这是什么？](#这是什么)
-- [能做什么？效果示例](#能做什么效果示例)
-- [30 秒快速开始](#30-秒快速开始)
-  - [方式 A：Docker（最简单，什么都不用装）](#方式-adocker最简单什么都不用装)
-  - [方式 B：Cursor MCP（推荐程序员）](#方式-bcursor-mcp推荐程序员)
-  - [方式 C：pip 安装](#方式-cpip-安装)
-- [功能详解](#功能详解)
-  - [支持的输入方式](#支持的输入方式)
-  - [6 种视觉风格](#6-种视觉风格)
-  - [5 级受众适配](#5-级受众适配)
-  - [10+ 预置模板](#10-预置模板)
-  - [21 个 MCP 工具](#21-个-mcp-工具)
-- [安装指南（各平台详细步骤）](#安装指南各平台详细步骤)
-- [使用教程（带截图）](#使用教程带截图)
-- [项目结构说明](#项目结构说明)
-- [常见问题 FAQ](#常见问题-faq)
-- [开源协议](#开源协议)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
+[![Manim](https://img.shields.io/badge/powered%20by-Manim-brightgreen.svg)](https://www.manim.community/)
+[![MCP](https://img.shields.io/badge/MCP-compatible-orange.svg)](https://modelcontextprotocol.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 这是什么？
+## 📺 效果展示
 
-这是一个 **AI + 数学动画** 工具，核心能力：
+下面是本项目已渲染的真实案例（全部代码见 [`examples/`](examples/) 目录）：
 
-1. **你描述题目或概念** → AI 自动生成漂亮的动画视频
-2. **上传 PDF 试卷或图片** → OCR 识别后自动讲解每道题
-3. **对话式修改** → 「字再大一点」「换成黑板风格」「慢一些」
-4. **零编程基础可用** → Web 界面点点就行，不需要会写代码
+### 🏆 2025 高考真题讲解（3 道大题）
 
-底层使用 [Manim Community Edition](https://www.manim.community/)（3Blue1Brown 同款动画引擎）+ [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) 实现 AI 对话控制。
+| 题目 | 时长 | 内容亮点 |
+|------|------|----------|
+| [第17题 立体几何](examples/gaokao_2025/gaokao_2025_17_solid.py) | 1分13秒 | 四棱锥3D建模 + 360°旋转 + 球面可视化 + 二面角计算 |
+| [第18题 圆锥曲线](examples/gaokao_2025/gaokao_2025_18_ellipse.py) | 1分32秒 | 椭圆逐步求解 + 动点轨迹动画 + |PM|最大值演示 |
+| [第19题 导数压轴](examples/gaokao_2025/gaokao_2025_19_derivative.py) | 2分05秒 | f(x)=5cosx−cos5x 全解 + 和差化积可视化 + φ 扫描动画 |
 
----
+### 📚 基础数学 15 个案例
 
-## 能做什么？效果示例
+| 案例 | 时长 | 知识点 |
+|------|------|--------|
+| 欧拉公式 | ~20s | $e^{i\pi}+1=0$，复平面旋转动画 |
+| 配方法 | ~15s | 逐步配方 + 抛物线图像 |
+| 三角函数变换 | ~15s | A/ω/φ 逐步变化对比 |
+| 向量加法 | ~12s | 平行四边形法则 |
+| ε-δ 极限定义 | ~15s | 可视化 ε 带和 δ 带 |
+| 矩阵乘法 | ~15s | 逐元素展开 |
+| 泰勒展开 | ~18s | 7 阶逼近 sin(x) |
+| 贝叶斯定理 | ~20s | 韦恩图 + 医学检测案例 |
+| 斐波那契/黄金比例 | ~18s | 比值趋近 φ 的折线图 |
+| 复数平面 | ~15s | 复数运算几何意义 |
+| 杨辉三角 | ~12s | 逐行生成 + 二项式定理 |
+| 排序算法 | ~14s | 时间复杂度对比表 |
+| 微积分基本定理 | ~20s | 面积可视化 |
+| 简谐运动 | ~18s | 弹簧动画 + 实时波形描绘 |
+| 3D 空间平面 | ~35s | 三维旋转 + 法向量 |
 
-### 示例 1：勾股定理可视化证明
+### 🔬 进阶长案例 12 个
 
-**输入：** `帮我做一个勾股定理的证明动画，适合初中生看`
-
-**输出效果：**
-- 直角三角形逐步出现，三边分别标注 a、b、c
-- 三个正方形从各边长出，面积用颜色填充
-- 文字说明：`a² + b² = c²` 动态写出
-- 最终公式高亮闪烁，配合步骤解说字幕
-
-```
-📁 animation_output/
-  └── pythagorean_theorem_middle_school.mp4  (约 45 秒, 1080p)
-```
-
----
-
-### 示例 2：高考真题 PDF 讲解
-
-**输入：** 上传 `2024高考数学全国卷.pdf`，然后说：`帮我讲解第 3 题`
-
-**输出：**
-- 题目文字出现在画面左边
-- 解题步骤逐步展示在右边
-- 关键计算步骤有动画演示
-- 最终选项高亮标出正确答案
-
----
-
-### 示例 3：函数图像变换
-
-**输入：** `展示 y=sin(x) 通过平移、缩放、翻转变成各种形式的过程`
-
-**输出：**
-- 坐标系从中心展开
-- 正弦曲线动态绘制
-- 参数 A、ω、φ 分别变化，图像实时跟随变形
-- 每个变换配文字说明
+| 案例 | 时长 | 知识点 |
+|------|------|--------|
+| 高考导数压轴 | 45s | f(x)=x−1−a·ln(x)，单调性讨论+不等式证明 |
+| 3D 立体几何 | 30s | 正方体截面 + 二面角计算 |
+| 高考含参函数 | 42s | f(x)=eˣ−ax−1，含参讨论 + 极值 |
+| 高考递推数列 | 40s | 取倒数化等差 + 前 8 项验证 |
+| 抛体运动 | 32s | 轨迹 + 实时速度矢量 + 三角度对比 |
+| 电场力与电势 | 32s | 电场线 + 等势面 + 电偶极子 |
+| 椭圆焦点性质 | 30s | 动点绕行，实时验证 |PF₁|+|PF₂|=2a |
+| 弹簧能量守恒 | 32s | Ek/Ep 时间曲线 + 相空间椭圆 |
+| 直线与圆 | 37s | 相交/相切/相离三种情况 |
+| SIR 传染病模型 | 25s | 微分方程数值解 + 群体免疫阈值 |
+| 法拉第定律 | 30s | 滑轨动画 + EMF 推导 |
+| 特征值与特征向量 | 40s | 矩阵变换 + 网格变形动画 |
 
 ---
 
-### 示例 4：LaTeX 公式讲解
+## 🚀 30 秒快速开始
 
-**输入：** `\int_0^{\pi} \sin(x)\,dx = 2`
-
-**输出：**
-- 公式从左到右逐字写出
-- 坐标系上 sin(x) 曲线绘制
-- 0 到 π 的区域用颜色填充
-- 标注面积 = 2，连线指向公式
-
----
-
-## 30 秒快速开始
-
-> 💡 **零基础推荐方式 A（Docker），5 分钟内看到效果。**
-
----
-
-### 方式 A：Docker（最简单，什么都不用装）
-
-前提：安装好 [Docker Desktop](https://www.docker.com/products/docker-desktop/)（官网下载，双击安装，免费）
+### 方式 A：Docker（零基础首选，5 分钟内出效果）
 
 ```bash
-# 第一步：拉取镜像（需要几分钟，只需做一次）
-docker pull math-animation-mcp
-
-# 第二步：启动
-docker run -p 7860:7860 -v ./output:/app/animation_output math-animation-mcp
-
-# 第三步：打开浏览器
-# 访问 http://localhost:7860
-```
-
-或者用 docker-compose 一键启动（克隆本仓库后执行）：
-
-```bash
+# 克隆项目
 git clone https://github.com/bcefghj/math-animation-mcp.git
 cd math-animation-mcp
+
+# 一键启动（自动下载依赖）
 docker compose up -d
-# 访问 http://localhost:7860
+
+# 打开浏览器
+# → http://localhost:7860
 ```
 
----
+### 方式 B：Cursor MCP（程序员推荐）
 
-### 方式 B：Cursor MCP（推荐程序员）
-
-> 需要已安装 [Cursor 编辑器](https://cursor.com/)（免费）
-
-**第一步：** 在你的项目根目录创建文件 `.cursor/mcp.json`：
+在项目根目录创建 `.cursor/mcp.json`：
 
 ```json
 {
@@ -146,421 +89,471 @@ docker compose up -d
     "math-animation": {
       "command": "uvx",
       "args": ["math-animation-mcp"],
-      "env": {
-        "OUTPUT_DIR": "./animation_output"
-      }
+      "env": { "OUTPUT_DIR": "./animation_output" }
     }
   }
 }
 ```
 
-**第二步：** 重启 Cursor，打开 AI 对话框（`Cmd+L` 或 `Ctrl+L`）
-
-**第三步：** 直接说话：
+重启 Cursor，`Cmd+L` 打开对话直接说话：
 
 ```
-帮我做一个勾股定理的证明动画
-
-@高考真题.pdf 帮我把第 3 题做成讲解动画
-
-把这段关于导数的文字做成教学动画，黑板风格，高中生受众
-
-动画太快了，字再大一点，换成可汗学院风格
+帮我做一个勾股定理证明动画，适合初中生
+@高考数学.pdf 讲解第18题
+把这段导数知识点做成动画，黑板风格
 ```
-
----
 
 ### 方式 C：pip 安装
 
-> 需要 Python 3.11+。如果你没有 Python，[点这里下载](https://www.python.org/downloads/)
+```bash
+pip install math-animation-mcp
+math-animation-mcp --web       # 启动 Web 界面
+# → http://localhost:7860
+```
+
+---
+
+## 📖 保姆级安装教程
+
+> 完全小白也能看懂，按步骤来，10 分钟搞定
+
+### 第一步：确认你的电脑系统
+
+- **苹果 Mac**（macOS）→ 看下面 [macOS 安装](#macos-安装)
+- **Windows 10/11** → 看 [Windows 安装](#windows-安装)
+- **Linux（Ubuntu）** → 看 [Linux 安装](#linux-安装)
+- **懒得折腾** → 看 [Docker 安装](#docker-安装最懒最稳)（任何系统都行）
+
+---
+
+### macOS 安装
+
+> 适用于 macOS 12 Monterey 及以上（M1/M2/M3 芯片也支持）
+
+**第一步：打开终端**
+
+按 `Command（⌘）+ 空格`，输入「终端」，按回车打开。
+
+**第二步：安装 Homebrew（没有的话）**
+
+把下面这行粘贴到终端，按回车：
 
 ```bash
-# 安装
-pip install math-animation-mcp
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
+> 💡 Homebrew 是 macOS 上的软件包管理器，相当于苹果版的「软件商店」，免费。  
+> 安装过程需要 5-15 分钟，期间会要求输入电脑密码（输入时屏幕不显示字符，正常的）。
+
+**第三步：安装系统依赖**
+
+```bash
+# 安装绘图库和视频工具
+brew install cairo pango ffmpeg pkg-config
+
+# 安装中文字体（不装的话中文会显示乱码）
+brew install --cask font-noto-sans-cjk
+```
+
+> ⏱ 预计耗时：5-10 分钟（取决于网速）
+
+**第四步：安装 Python（建议用 uv 管理）**
+
+```bash
+# 安装 uv（现代 Python 包管理器，速度是 pip 的 10-100 倍）
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 让终端识别 uv 命令（关闭终端重新打开也行）
+source ~/.zshrc
+```
+
+**第五步：克隆并安装项目**
+
+```bash
+# 下载项目代码
+git clone https://github.com/bcefghj/math-animation-mcp.git
+cd math-animation-mcp
+
+# 创建虚拟环境并安装（约 5-10 分钟）
+uv venv .venv
+source .venv/bin/activate
+uv pip install -e ".[web,ocr]"
+```
+
+**第六步：验证安装**
+
+```bash
+# 测试是否安装成功
+python -c "import manim; print('Manim OK')"
+python -c "from math_animation_mcp.utils.sandbox import render_manim_code; print('MCP OK')"
+```
+
+两行都输出 OK 就说明安装成功了！
+
+**第七步：启动！**
+
+```bash
 # 启动 Web 界面
-math-animation-mcp --web
-# 访问 http://localhost:7860
+python -m math_animation_mcp --web
 
-# 或者直接渲染（命令行）
-math-animation-mcp render --text "勾股定理证明" --style three_blue_one_brown --quality medium
+# 输出类似：Running on local URL: http://127.0.0.1:7860
+```
+
+打开浏览器访问 `http://127.0.0.1:7860`，就能用了！
+
+---
+
+### Windows 安装
+
+> 适用于 Windows 10（1903 及以上）/ Windows 11
+
+**第一步：安装 Python**
+
+1. 打开 https://www.python.org/downloads/
+2. 点击「Download Python 3.11.x」（选 3.11 或更新版本）
+3. **关键**：安装时勾选「✅ Add Python to PATH」
+4. 点击「Install Now」
+
+**第二步：安装 Chocolatey（Windows 的软件包管理器）**
+
+以管理员身份打开 PowerShell（开始菜单 → 搜索 PowerShell → 右键「以管理员身份运行」）：
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+**第三步：安装 Manim 和 FFmpeg**
+
+在管理员 PowerShell 中继续：
+
+```powershell
+choco install manimce ffmpeg -y
+```
+
+> ⏱ 预计耗时：10-20 分钟
+
+**第四步：安装 MiKTeX（LaTeX 环境，用来渲染数学公式）**
+
+1. 打开 https://miktex.org/download
+2. 下载并运行安装程序
+3. 安装时选择「Install missing packages automatically: Yes」
+
+> ⏱ 预计耗时：10-20 分钟
+
+**第五步：克隆并安装项目**
+
+在普通 PowerShell（不需要管理员）中：
+
+```powershell
+git clone https://github.com/bcefghj/math-animation-mcp.git
+cd math-animation-mcp
+pip install -e ".[web]"
+```
+
+**第六步：启动！**
+
+```powershell
+python -m math_animation_mcp --web
+```
+
+打开浏览器访问 `http://localhost:7860`
+
+---
+
+### Linux 安装
+
+> 适用于 Ubuntu 20.04 / 22.04 / 24.04（Debian 系列）
+
+```bash
+# 第一步：安装系统依赖
+sudo apt update
+sudo apt install -y \
+    libcairo2-dev libpango1.0-dev \
+    ffmpeg python3-pip python3-venv \
+    texlive-full fonts-noto-cjk \
+    pkg-config cmake git
+
+# 第二步：克隆项目
+git clone https://github.com/bcefghj/math-animation-mcp.git
+cd math-animation-mcp
+
+# 第三步：创建虚拟环境
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 第四步：安装
+pip install -e ".[web,ocr]"
+
+# 第五步：启动
+python -m math_animation_mcp --web
 ```
 
 ---
 
-## 功能详解
+### Docker 安装（最懒最稳）
 
-### 支持的输入方式
+> 什么都不用装，只需要有 Docker。适合任何平台（Mac/Win/Linux）。
 
-| 输入类型 | 说明 | 示例 |
-|---------|------|------|
-| **自然语言** | 直接描述你想要的动画 | `「帮我做一个勾股定理的证明动画」` |
-| **LaTeX 公式** | 粘贴数学公式 | `` `\int_0^{\pi} \sin(x) dx = 2` `` |
-| **PDF 文件** | 上传试卷或教材 PDF | 拖入 `高考2024.pdf` |
-| **图片/截图** | 手机拍照或截图题目 | 上传 `题目.jpg` |
-| **文章段落** | 粘贴教材中的段落文字 | 粘贴一段微积分讲解 |
-| **修改指令** | 口语化调整已有动画 | `「字再大一点」「慢一些」「换颜色」` |
+**第一步：安装 Docker Desktop**
 
----
+- Mac：https://www.docker.com/products/docker-desktop/ → 下载 Mac 版 → 双击安装
+- Windows：同上，下载 Windows 版
+- Linux：`sudo apt install docker.io docker-compose-v2`
 
-### 6 种视觉风格
+**第二步：一键启动**
 
-| 风格名称 | 背景色 | 适合场景 | 预览 |
-|---------|-------|---------|------|
-| `three_blue_one_brown` | 深灰 `#1C1C1C` | 科普、大学教学（经典 3B1B 配色） | 深色背景 + 蓝/黄高亮 |
-| `khan_academy` | 白色 `#FFFFFF` | 中小学教学（柔和明亮） | 白底 + 彩色线条 |
-| `textbook` | 浅灰 `#F5F5F5` | 正式论文、教科书 | 极简风格 |
-| `playful` | 暖黄 `#FFF8E1` | 小学、低龄学生 | 彩色活泼 |
-| `dark_tech` | 纯黑 `#000000` | 大学、竞赛、CS | 霓虹配色 |
-| `blackboard` | 深绿 `#2D5016` | 课堂模拟 | 粉笔白字 |
+```bash
+git clone https://github.com/bcefghj/math-animation-mcp.git
+cd math-animation-mcp
+docker compose up -d
+```
 
-切换风格只需一句话：「换成黑板风格」或在代码中：
+> 第一次运行会下载镜像，约需 3-8 分钟（视网速）。
 
-```python
-result = render_animation(code, style="blackboard")
+**第三步：打开浏览器**
+
+访问 `http://localhost:7860`，直接使用！
+
+**停止服务：**
+
+```bash
+docker compose down
+```
+
+**更新到最新版：**
+
+```bash
+git pull
+docker compose up -d --build
 ```
 
 ---
 
-### 5 级受众适配
+## 🎮 使用教程
 
-系统会根据受众级别自动调整**动画速度、字体大小、讲解详细程度**：
+### 教程 1：Web 界面生成你的第一个动画
 
-| 级别 | 受众 | 速度 | 字体 | 讲解 |
-|-----|------|------|-----|------|
-| L1 | 小学生 | 0.5× 慢速 | 最大 | 每步都有解释，大量停顿 |
-| L2 | 初中生 | 0.7× | 大 | 详细解释 |
-| L3 | 高中生 | 1.0× 正常 | 正常 | 适中 |
-| L4 | 大学生 | 1.2× | 小 | 简洁 |
-| L5 | 竞赛/研究 | 1.5× 快速 | 最小 | 最精简 |
+1. 启动服务后，打开浏览器访问 `http://localhost:7860`
+2. 在「输入描述」框中输入（中英文都行）：
+   ```
+   帮我做一个勾股定理的证明动画，适合初中生看，用蓝白配色
+   ```
+3. 选择「风格」：`three_blue_one_brown`（默认）
+4. 选择「质量」：`low`（最快预览，约 15 秒出结果）
+5. 点击「生成动画」按钮
+6. 等待渲染完成，视频自动在右侧播放
+7. 点击「下载」保存到本地
 
-设置方式：「以后默认受众是初中生」或：
+> 💡 **小技巧**：先用 `low` 质量预览，满意后再切到 `medium` 或 `high` 生成高清版
+
+---
+
+### 教程 2：在 Cursor AI 里对话式生成
+
+> 需要先完成 [Cursor MCP 配置](#方式-b-cursor-mcp程序员推荐)
+
+打开 Cursor，`Cmd+L`（Mac）/ `Ctrl+L`（Windows）打开对话，直接输入：
+
+**示例 1：基础动画**
+```
+帮我做一个展示正弦函数 y=sin(x) 的动画，展示振幅、频率、相位变化
+```
+
+**示例 2：高考题讲解**
+```
+帮我做一个 2025 高考数学第 18 题（椭圆）的讲解动画，
+要求：题目先展示 → 一步步求解方程 → 画出椭圆图形 → 动点演示性质
+```
+
+**示例 3：上传 PDF**
+```
+@数学试卷.pdf 帮我讲解第 3 题，可汗学院风格，高中生受众
+```
+
+**示例 4：对话修改**
+```
+（上一个动画太快了）帮我把动画速度调慢一半，字体再大一点
+```
+
+---
+
+### 教程 3：直接运行案例代码
+
+项目自带 27 个可直接运行的案例：
+
+```bash
+cd math-animation-mcp
+source .venv/bin/activate
+
+# 运行 2025 高考第 19 题（导数）讲解
+python3 -c "
+import sys; sys.path.insert(0, 'src')
+from math_animation_mcp.utils.sandbox import render_manim_code
+
+with open('examples/gaokao_2025/gaokao_2025_19_derivative.py') as f:
+    code = f.read()
+
+result = render_manim_code(code, quality='low', output_dir='./output')
+if result.success:
+    print(f'成功！视频保存在: {result.file_path}')
+"
+```
+
+批量运行所有案例：
+
+```bash
+# 运行 15 个基础案例（约 5 分钟）
+python examples/basic_math/test_all_cases.py
+
+# 运行 12 个进阶长案例（约 10 分钟）
+python examples/basic_math/test_long_cases.py
+```
+
+---
+
+### 教程 4：通过命令行 MCP Server 使用
+
+```bash
+# 启动 MCP Server（供 AI 工具调用）
+python -m math_animation_mcp
+
+# 或者直接用 uvx（无需安装）
+uvx math-animation-mcp
+```
+
+配合 Claude Desktop 使用，在 `claude_desktop_config.json` 中添加：
 
 ```json
 {
-  "audience_level": 2,
-  "style": "khan_academy"
+  "mcpServers": {
+    "math-animation": {
+      "command": "uvx",
+      "args": ["math-animation-mcp"]
+    }
+  }
 }
 ```
 
 ---
 
-### 10+ 预置模板
+## 🛠 常用命令速查
 
-覆盖中高考核心知识点，开箱即用：
+```bash
+# 启动 Web 界面
+python -m math_animation_mcp --web
 
-| 分类 | 模板名称 | 适用年级 |
-|-----|---------|---------|
-| 几何 | 勾股定理证明、圆的性质、相似三角形 | 初中 |
-| 代数 | 一元二次方程、函数图像变换、因式分解 | 初中/高中 |
-| 微积分 | 导数切线、定积分面积、极限 | 高中/大学 |
-| 三角函数 | 单位圆、正弦余弦、和差化积 | 高中 |
-| 统计概率 | 正态分布、频率直方图、排列组合 | 高中 |
-| 物理 | 抛体运动、受力分析、电路图 | 高中 |
-| 计算机 | 排序算法、二分查找、递归树 | 大学/竞赛 |
+# 命令行直接渲染
+python -m math_animation_mcp render \
+  --text "勾股定理证明" \
+  --style three_blue_one_brown \
+  --quality medium \
+  --output ./my_videos/
+
+# 渲染指定 .py 文件
+python -m math_animation_mcp render-file ./my_scene.py
+
+# 查看所有可用模板
+python -m math_animation_mcp list-templates
+
+# 检查环境
+python -m math_animation_mcp check
+```
 
 ---
 
-### 21 个 MCP 工具
+## 🎨 6 种视觉风格
+
+| 风格 | 命令 | 背景 | 适合 |
+|------|------|------|------|
+| `three_blue_one_brown` | 默认 | 深灰 | 科普、大学 |
+| `khan_academy` | `--style khan_academy` | 白色 | 中小学 |
+| `textbook` | `--style textbook` | 浅灰 | 正式教材 |
+| `playful` | `--style playful` | 暖黄 | 小学低龄 |
+| `dark_tech` | `--style dark_tech` | 纯黑 | 竞赛、CS |
+| `blackboard` | `--style blackboard` | 深绿 | 模拟课堂 |
+
+对话切换：「换成黑板风格」「用可汗学院配色」
+
+---
+
+## 📐 支持的知识点范围
 
 <details>
-<summary>点击展开完整工具列表</summary>
+<summary>点击展开完整列表</summary>
 
-**渲染工具（3个）**
-- `render_animation(code, quality, format, style)` — 渲染完整视频
-- `preview_scene(code, style)` — 快速 480p 预览（速度快 10 倍）
-- `render_gif(code, style)` — 导出 GIF 动图
+### 高中数学
+- **函数与导数**：指数函数、对数函数、三角函数、导数计算、单调性分析、极值最值
+- **圆锥曲线**：椭圆/双曲线/抛物线的方程、焦点性质、离心率、切线
+- **立体几何**：棱柱/棱锥/球，线面角、二面角、空间向量法证明
+- **数列**：等差/等比、递推数列、数学归纳法
+- **概率统计**：古典概型、条件概率、贝叶斯、正态分布、频率直方图
 
-**模板工具（3个）**
-- `list_templates(category, difficulty)` — 浏览所有模板
-- `get_template(template_id)` — 获取模板源代码
-- `search_templates(keyword)` — 关键词搜索模板
+### 高中物理
+- **力学**：牛顿定律、抛体运动、圆周运动、简谐振动、弹性势能
+- **电磁学**：库仑力、电场线、电势、安培力、电磁感应、法拉第定律
 
-**输入处理（5个）**
-- `detect_input_type(content)` — 自动识别输入类型
-- `parse_pdf(file_path)` — 解析 PDF，提取文字和公式
-- `parse_image(file_path)` — OCR 图片，识别数学公式
-- `fix_ocr_errors(text)` — 修复 OCR 常见错误
-- `normalize_content(raw_text)` — 结构化提取内容
+### 大学数学
+- **微积分**：极限定义（ε-δ）、导数、积分、泰勒展开、微分方程
+- **线性代数**：矩阵运算、行列式、特征值、线性变换、相空间
+- **概率论**：随机变量、期望、方差、中心极限定理
 
-**自修复工具（3个）**
-- `analyze_error(code, error_msg)` — 分析错误类型
-- `fix_latex_error(code, error_msg)` — 自动修复 LaTeX 错误
-- `fix_python_error(code, error_msg)` — 自动修复 Python/Manim API 错误
-
-**个性化工具（4个）**
-- `set_style(style_name)` — 切换视觉风格
-- `set_preferences(preferences_json)` — 更新用户偏好
-- `get_preferences()` — 读取当前设置
-- `set_branding(watermark, logo_path, intro_text, outro_text)` — 设置品牌水印
-
-**导出工具（3个）**
-- `export_video(file_path, format, aspect_ratio)` — 格式/比例转换
-- `add_subtitles(video_path, text)` — 烧录字幕
-- `add_tts_narration(video_path, script, voice)` — 配音（即将推出）
+### 计算机科学
+- 排序算法（冒泡/归并/快排/堆排）
+- 数据结构（树、图、哈希表）
+- 算法复杂度分析
 
 </details>
 
 ---
 
-## 安装指南（各平台详细步骤）
+## 🤖 MCP 工具列表（供 AI 助手调用）
 
-### macOS（苹果电脑）
+<details>
+<summary>展开 21 个工具说明</summary>
 
-**方法 1：一键安装脚本（最简单）**
+| 工具名 | 功能 |
+|--------|------|
+| `render_animation` | 渲染完整视频（主工具）|
+| `preview_scene` | 快速低清预览 |
+| `render_gif` | 导出 GIF 动图 |
+| `list_templates` | 列出所有预置模板 |
+| `get_template` | 获取模板源代码 |
+| `search_templates` | 关键词搜索模板 |
+| `detect_input_type` | 自动识别输入类型 |
+| `parse_pdf` | 解析 PDF 提取公式 |
+| `parse_image` | OCR 图片识别数学公式 |
+| `fix_ocr_errors` | 修复 OCR 常见错误 |
+| `normalize_content` | 结构化内容 |
+| `analyze_error` | 分析渲染错误 |
+| `fix_latex_error` | 自动修复 LaTeX 错误 |
+| `fix_python_error` | 自动修复 Python 错误 |
+| `set_style` | 切换视觉风格 |
+| `set_preferences` | 更新用户偏好 |
+| `get_preferences` | 读取当前设置 |
+| `set_branding` | 设置水印和品牌 |
+| `export_video` | 格式转换/比例调整 |
+| `add_subtitles` | 烧录字幕 |
+| `add_tts_narration` | AI 配音（即将推出）|
 
-打开「终端」（在 Spotlight 搜索 `终端`），粘贴以下命令：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/bcefghj/math-animation-mcp/main/install.sh | bash
-```
-
-等待安装完成（约 5-10 分钟），然后：
-
-```bash
-math-animation-mcp --web
-```
-
-**方法 2：手动安装（遇到问题时用这个）**
-
-```bash
-# 第一步：安装 Homebrew（如果还没有）
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# 第二步：安装系统依赖
-brew install cairo pango ffmpeg
-
-# 第三步：安装字体（中文支持）
-brew install --cask font-noto-sans-cjk
-
-# 第四步：安装 Python 包
-pip3 install math-animation-mcp
-
-# 第五步：启动
-math-animation-mcp --web
-```
+</details>
 
 ---
 
-### Windows（10 / 11）
+## ❓ 常见问题 FAQ
 
-**方法 1：一键安装脚本**
+**Q：完全不会编程，能用吗？**  
+完全可以！Docker + Web 界面，打开浏览器说话就行，不需要写任何代码。
 
-以管理员身份打开「PowerShell」（开始菜单搜索 `PowerShell`，右键「以管理员身份运行」）：
+**Q：渲染需要多长时间？**
 
-```powershell
-irm https://raw.githubusercontent.com/bcefghj/math-animation-mcp/main/install.ps1 | iex
-```
+| 质量 | 30 秒动画耗时 | 建议用途 |
+|------|------------|---------|
+| low (480p) | 10-30 秒 | 快速预览 |
+| medium (720p) | 30-90 秒 | 日常使用 |
+| high (1080p) | 2-5 分钟 | 最终输出 |
 
-**方法 2：手动安装**
-
-```powershell
-# 第一步：安装 Chocolatey 包管理器（如果还没有）
-Set-ExecutionPolicy Bypass -Scope Process -Force
-iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-# 第二步：安装依赖
-choco install manimce ffmpeg -y
-
-# 第三步：安装 Python 包
-pip install math-animation-mcp
-
-# 第四步：启动
-math-animation-mcp --web
-```
-
-> ⚠️ Windows 用户：如果遇到 LaTeX 相关错误，需要额外安装 [MiKTeX](https://miktex.org/download)（免费）
-
----
-
-### Linux（Ubuntu / Debian）
-
-```bash
-# 第一步：安装系统依赖
-sudo apt update
-sudo apt install -y libcairo2-dev libpango1.0-dev ffmpeg texlive-full fonts-noto-cjk
-
-# 第二步：安装 Python 包
-pip install math-animation-mcp
-
-# 第三步：启动
-math-animation-mcp --web
-```
-
----
-
-### Docker（任何平台，推荐小白使用）
-
-只需安装好 [Docker Desktop](https://www.docker.com/products/docker-desktop/)，然后：
-
-```bash
-# 克隆仓库
-git clone https://github.com/bcefghj/math-animation-mcp.git
-cd math-animation-mcp
-
-# 一键启动（后台运行）
-docker compose up -d
-
-# 访问 Web 界面
-# 打开浏览器访问 http://localhost:7860
-
-# 停止服务
-docker compose down
-```
-
----
-
-## 使用教程（带截图）
-
-### 教程 1：用 Web 界面生成第一个动画
-
-1. 启动服务后，打开浏览器访问 `http://localhost:7860`
-2. 在「输入」框中输入：`勾股定理的几何证明，适合初中生看`
-3. 在「风格」下拉菜单选择 `three_blue_one_brown`
-4. 在「质量」中选择 `medium`（中等质量，速度较快）
-5. 点击「生成动画」按钮
-6. 等待约 30-60 秒，视频出现在右侧预览区
-7. 点击「下载」保存到本地
-
-```
-📌 提示：第一次渲染会慢一些（需要加载 LaTeX 等组件），后续会快很多。
-```
-
----
-
-### 教程 2：在 Cursor 中对话生成动画
-
-1. 安装好 MCP 配置（见[方式 B](#方式-bcursor-mcp推荐程序员)）
-2. 打开 Cursor，按 `Cmd+L`（Mac）或 `Ctrl+L`（Windows）打开 AI 对话
-3. 输入：
-
-```
-帮我做一个展示函数 y=x² 图像的动画，用暗色科技风格，大学生受众
-```
-
-4. AI 会自动：
-   - 检测输入类型（函数可视化）
-   - 查找最接近的模板
-   - 生成 Manim 代码
-   - 渲染视频（会显示进度）
-5. 渲染完成后，视频保存在 `./animation_output/` 文件夹
-6. 如果想修改，直接说：
-
-```
-把坐标轴颜色改成蓝色，加上 x=-2 到 x=2 的范围标注
-```
-
----
-
-### 教程 3：上传 PDF 试卷自动讲解
-
-1. 准备一个 PDF 文件（高考数学试卷、教材章节等）
-2. 在 Cursor AI 对话中输入：
-
-```
-@2024高考数学.pdf 帮我讲解第 5 题，可汗学院风格，高中生受众
-```
-
-3. 系统会：
-   - 解析 PDF 文件
-   - 识别第 5 题的题目和解题过程
-   - 生成逐步讲解动画
-
-> 💡 **提示**：PDF 中的数学公式如果是扫描版（图片格式），系统会自动 OCR 识别，但准确率约 85-95%，识别后可以对话修正。
-
----
-
-### 教程 4：对话式修改动画
-
-动画生成后，你可以用自然语言调整：
-
-| 你说的话 | 效果 |
-|---------|------|
-| `字再大一点` | 所有文字字号 +20% |
-| `慢一些` | 动画速度 ×0.7 |
-| `换成黑板风格` | 切换为 blackboard 风格 |
-| `加个水印，写上"张老师课堂"` | 右下角添加水印 |
-| `导出 GIF` | 转换为 GIF 格式 |
-| `竖屏版，适合手机观看` | 导出 9:16 比例 |
-
----
-
-## 项目结构说明
-
-> 这部分面向想深入了解或二次开发的用户
-
-```
-math-animation-mcp/
-│
-├── 📄 pyproject.toml          # Python 包配置（版本、依赖等）
-├── 🐳 Dockerfile              # Docker 镜像配置
-├── 🐳 docker-compose.yml      # 一键启动配置
-├── 🔧 install.sh              # macOS/Linux 一键安装脚本
-├── 🔧 install.ps1             # Windows 一键安装脚本
-│
-├── 📁 src/math_animation_mcp/
-│   ├── server.py              # 核心：MCP Server，注册 21 个工具
-│   ├── web_server.py          # Web 界面（基于 Gradio）
-│   ├── cli.py                 # 命令行入口
-│   │
-│   ├── 📁 tools/
-│   │   ├── render_tools.py    # 渲染：生成视频/GIF
-│   │   ├── template_tools.py  # 模板：浏览/搜索/获取
-│   │   ├── input_tools.py     # 输入：PDF/图片/文字处理
-│   │   ├── repair_tools.py    # 自修复：错误分析和自动修复
-│   │   ├── personalization_tools.py  # 个性化：风格/偏好
-│   │   └── export_tools.py    # 导出：格式转换/字幕/配音
-│   │
-│   ├── 📁 templates/          # 10+ 预置动画模板
-│   │   ├── geometry/          # 几何（勾股定理、圆等）
-│   │   ├── algebra/           # 代数（方程、函数等）
-│   │   ├── calculus/          # 微积分（导数、积分等）
-│   │   ├── trigonometry/      # 三角函数
-│   │   ├── statistics/        # 统计概率
-│   │   ├── physics/           # 物理
-│   │   └── cs/                # 计算机科学
-│   │
-│   ├── 📁 styles/
-│   │   └── presets.py         # 6 种视觉风格配置
-│   │
-│   ├── 📁 config/             # 用户偏好配置文件
-│   └── 📁 utils/              # 工具函数（沙箱、中文支持等）
-│
-├── 📁 docs/                   # 详细文档
-│   ├── getting-started/       # 入门教程
-│   ├── tutorials/             # 进阶教程
-│   └── faq/                   # 常见问题
-│
-└── 📁 animation_output/       # 生成的动画视频（自动创建）
-```
-
----
-
-## 常见问题 FAQ
-
-**Q: 我完全不会编程，能用吗？**
-
-完全可以！有三种零编程方式：
-- Docker + Web 界面：浏览器里点点就行
-- Cursor MCP：在 Cursor 里说话就行
-- pip + Web 界面：一行命令启动，然后浏览器操作
-
----
-
-**Q: 渲染一个动画需要多长时间？**
-
-| 质量 | 时长（30 秒动画） | 适合场景 |
-|-----|-----------------|---------|
-| `low` (480p) | 约 10-20 秒 | 快速预览 |
-| `medium` (720p) | 约 30-60 秒 | 日常使用 |
-| `high` (1080p) | 约 2-5 分钟 | 最终输出 |
-| `ultra` (4K) | 约 10-30 分钟 | 专业发布 |
-
----
-
-**Q: 中文显示乱码怎么办？**
-
-确保安装了中文字体：
+**Q：中文显示方框或乱码怎么办？**
 
 ```bash
 # macOS
@@ -569,84 +562,105 @@ brew install --cask font-noto-sans-cjk
 # Ubuntu
 sudo apt install fonts-noto-cjk
 
-# Windows：下载 Noto Sans CJK 字体包安装
+# Windows：下载 Noto CJK 字体
 # https://www.google.com/get/noto/
 ```
 
-Docker 版已预装所有字体，不存在此问题。
+Docker 版已预装所有字体，不会有这个问题。
 
----
+**Q：渲染失败了怎么办？**  
+系统内置自动修复：失败后自动重试最多 5 次，包括 LaTeX 修复、Python 语法修复。如果仍失败，会降级到预置模板保证出图。
 
-**Q: 渲染失败了怎么办？**
-
-系统内置自修复机制：
-1. 失败后自动分析错误类型（LaTeX 错误 / Python 错误 / 资源不足）
-2. 自动修复并重试，最多尝试 5 次
-3. 连续失败会自动降级到最接近的预置模板
-4. 如果你看到"已降级到模板"的提示，说明自动修复已处理，动画仍会正常生成
-
----
-
-**Q: 没有 LaTeX 环境怎么办？**
-
-- **Docker 版**：已包含完整 LaTeX，无需操心
-- **本地安装版**：
-  - macOS：`brew install --cask mactex`（约 4GB）
-  - Windows：安装 [MiKTeX](https://miktex.org/download)（推荐）或 [TeX Live](https://www.tug.org/texlive/)
-  - Ubuntu：`sudo apt install texlive-full`
-- **临时方案**：在代码中用 `Text()` 代替 `MathTex()`（纯文字，无需 LaTeX）
-
----
-
-**Q: 可以商用吗？**
-
-本项目基于 [MIT 协议](LICENSE)，可以免费用于个人和商业用途，唯一要求是保留原始版权声明。
-
----
-
-**Q: 怎么给动画加自己的 Logo 或水印？**
+**Q：可以做竖屏短视频版本吗？**
 
 ```python
-# 通过 set_branding 工具设置
-set_branding(
-    watermark="张老师课堂",        # 右下角文字水印
-    logo_path="./my_logo.png",    # Logo 图片（可选）
-    intro_text="张老师数学课",     # 片头文字
-    outro_text="关注我，每天一题"  # 片尾文字
-)
+export_video("output.mp4", aspect_ratio="9:16")  # 适合抖音/视频号
 ```
 
-或者在 Cursor 中直接说：「加个水印，写上"张老师课堂"」
+或对话说：「导出竖屏版，9:16 比例」
 
----
-
-**Q: 可以导出竖屏版本吗（适合短视频）？**
+**Q：可以加自己的水印吗？**
 
 ```python
-export_video(
-    file_path="output.mp4",
-    format="mp4",
-    aspect_ratio="9:16"  # 抖音/视频号/Reels 格式
-)
+set_branding(watermark="张老师课堂", intro_text="张老师数学")
 ```
 
-或说：「导出竖屏版，9:16 比例」
+或对话说：「加个水印，写上"张老师课堂"」
+
+**Q：如何更新到最新版本？**
+
+```bash
+cd math-animation-mcp
+git pull
+source .venv/bin/activate
+uv pip install -e . --upgrade
+```
 
 ---
 
-## 开源协议
+## 📁 项目结构
 
-本项目基于 [MIT License](LICENSE) 开源，欢迎 Star、Fork、提 Issue 和 PR！
+```
+math-animation-mcp/
+├── 📁 src/math_animation_mcp/
+│   ├── server.py              # MCP Server（21个工具）
+│   ├── web_server.py          # Gradio Web 界面
+│   ├── cli.py                 # 命令行入口
+│   ├── 📁 tools/              # 工具实现
+│   │   ├── render_tools.py    # 渲染
+│   │   ├── input_tools.py     # PDF/图片/OCR 处理
+│   │   ├── repair_tools.py    # 自动修复
+│   │   ├── template_tools.py  # 模板管理
+│   │   ├── personalization_tools.py
+│   │   └── export_tools.py
+│   ├── 📁 templates/          # 预置模板库
+│   │   ├── geometry/          # 几何
+│   │   ├── algebra/           # 代数
+│   │   ├── calculus/          # 微积分
+│   │   ├── trigonometry/      # 三角
+│   │   ├── statistics/        # 统计概率
+│   │   ├── physics/           # 物理
+│   │   └── cs/                # 计算机
+│   ├── 📁 styles/presets.py   # 6种视觉风格
+│   ├── 📁 config/             # 用户偏好
+│   └── 📁 utils/              # 沙箱、中文支持、FFmpeg
+│
+├── 📁 examples/               # ✨ 可运行案例
+│   ├── 📁 gaokao_2025/        # 2025 高考真题（3道大题）
+│   │   ├── gaokao_2025_17_solid.py      # 立体几何
+│   │   ├── gaokao_2025_18_ellipse.py    # 圆锥曲线
+│   │   └── gaokao_2025_19_derivative.py # 导数压轴
+│   └── 📁 basic_math/         # 基础数学（27个案例）
+│       ├── test_all_cases.py            # 15个短案例
+│       └── test_long_cases.py           # 12个长案例
+│
+├── 📁 docs/                   # 详细文档
+│   ├── getting-started/
+│   ├── tutorials/
+│   └── faq/
+│
+├── 🐳 Dockerfile
+├── 🐳 docker-compose.yml
+├── 🔧 install.sh              # macOS/Linux 一键安装
+├── 🔧 install.ps1             # Windows 一键安装
+└── 📄 pyproject.toml
+```
 
 ---
 
-## 相关链接
+## 🙏 致谢
 
-- [Manim Community 官网](https://www.manim.community/) — 底层动画引擎
-- [Model Context Protocol](https://modelcontextprotocol.io/) — MCP 协议文档
-- [Cursor 编辑器](https://cursor.com/) — 推荐的 AI 编程工具
-- [3Blue1Brown](https://www.youtube.com/@3blue1brown) — 灵感来源
+- [Manim Community](https://www.manim.community/) — 动画引擎
+- [3Blue1Brown](https://www.3blue1brown.com/) — 灵感来源
+- [Model Context Protocol](https://modelcontextprotocol.io/) — AI 工具集成标准
+- [Gradio](https://gradio.app/) — Web 界面框架
 
 ---
 
-*Made with ❤️ for math education*
+## 📄 开源协议
+
+MIT License — 免费用于个人和商业用途，保留版权声明即可。
+
+---
+
+_Made with ❤️ for math education | 让每一道数学题都能被看见_
