@@ -1,0 +1,14 @@
+services:
+  math-animation:
+    build: .
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./animation_output:/app/animation_output
+      - ./config:/app/config
+    environment:
+      - OUTPUT_DIR=/app/animation_output
+      - DEFAULT_STYLE=three_blue_one_brown
+      - DEFAULT_QUALITY=medium
+      - LANG=zh_CN.UTF-8
+    restart: unless-stopped

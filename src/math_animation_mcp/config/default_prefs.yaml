@@ -1,0 +1,27 @@
+style:
+  preset: "three_blue_one_brown"
+  custom_colors:
+    primary: "#3B82F6"
+    secondary: "#F59E0B"
+    accent: "#10B981"
+
+audience:
+  level: 3
+  language: "zh-CN"
+
+output:
+  default_quality: "medium"
+  default_format: "mp4"
+  aspect_ratio: "16:9"
+  max_duration: 120
+
+animation:
+  speed_multiplier: 1.0
+  pause_between_steps: 1.0
+  font_scale: 1.0
+
+branding:
+  watermark: ""
+  logo_path: ""
+  intro_text: ""
+  outro_text: ""

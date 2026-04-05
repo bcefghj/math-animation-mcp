@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.git/
+animation_output/
+*.mp4
+*.gif
+*.webm
+.cursor/

@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Animation outputs (generated files, often large)
+animation_output/
+*.mp4
+*.gif
+*.mov
+*.avi
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.cursor/
+*.swp
+*.swo
+.vscode/
+
+# Secrets
+.env
+*.pem
+*.key
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+*.cache
+
+# User preferences (machine-specific)
+manim_prefs.yaml

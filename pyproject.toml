@@ -1,0 +1,36 @@
+[project]
+name = "math-animation-mcp"
+version = "0.1.0"
+description = "MCP Server for generating 3Blue1Brown-style math teaching animations with Manim"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "manim>=0.18.0",
+    "mcp[cli]>=1.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "gradio>=4.0.0",
+    "pix2text>=1.1",
+]
+
+[project.optional-dependencies]
+ocr = [
+    "pix2text>=1.1",
+]
+web = [
+    "gradio>=4.0.0",
+]
+all = [
+    "math-animation-mcp[ocr,web]",
+]
+
+[project.scripts]
+math-animation-mcp = "math_animation_mcp.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/math_animation_mcp"]
